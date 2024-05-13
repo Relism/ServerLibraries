@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "serverlibraries",
+  "version": "${version}",
+  "name": "ServerLibraries",
+  "description": "Library collection to facilitate server-side mod creation for vanilla client players",
+  "authors": [
+    "Relism"
+  ],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/serverlibraries/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "net.vitacraft.serverlibraries.client.ServerLibrariesClient"
+    ],
+    "main": [
+      "net.vitacraft.serverlibraries.ServerLibraries"
+    ]
+  },
+  "mixins": [
+    "serverlibraries.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
