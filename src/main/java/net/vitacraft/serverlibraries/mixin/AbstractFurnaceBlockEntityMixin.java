@@ -1,14 +1,12 @@
 package net.vitacraft.serverlibraries.mixin;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.collection.DefaultedList;
+import net.vitacraft.serverlibraries.api.event.EventsRegistry;
+import net.vitacraft.serverlibraries.api.event.events.items.ItemSmeltEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,6 +19,10 @@ public class AbstractFurnaceBlockEntityMixin {
         ItemStack inputItem = slots.get(0);
         ItemStack fuel = slots.get(1);
         ItemStack outputItem = recipe.value().getResult(registryManager);
-        cir.setReturnValue(false);
+        ItemSmeltEvent event = new ItemSmeltEvent(inputItem, outputItem, fuel);
+        EventsRegistry.dispatchEvent(event);
+        if (event.isCancelled()) {
+            cir.setReturnValue(false);
+        }
     }
 }

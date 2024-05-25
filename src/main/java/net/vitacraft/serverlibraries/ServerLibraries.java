@@ -6,6 +6,7 @@ import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventsRegistry;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.ServerStartedEvent;
+import net.vitacraft.serverlibraries.api.utils.msg;
 
 public class ServerLibraries implements ModInitializer, Listener {
 
@@ -14,6 +15,7 @@ public class ServerLibraries implements ModInitializer, Listener {
 
     @Override
     public void onInitialize() {
+        msg.log("&#c0c0c0Initializing &#555555ServerLibraries &ffffff🚀");
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);
         EventsRegistry.registerListener(new TestListener());

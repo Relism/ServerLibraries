@@ -9,7 +9,10 @@
     "BlockMixin",
     "BlockStateChangeMixin",
     "EntityMoveMixin",
-    "PlayerPlaceBlockMixin"
+    "PlayerEntityMixin",
+    "PlayerPlaceBlockMixin",
+    "ServerPlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
   ],

@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.vitacraft.serverlibraries.api.event.Event;
 
 /**
@@ -11,14 +13,16 @@ import net.vitacraft.serverlibraries.api.event.Event;
  */
 public class PlayerBlockPlaceEvent implements Event {
     private boolean cancelled = false;
-    private final PlayerEntity player;
+    private final ServerPlayerEntity player;
     private final Block block;
     private final BlockState blockState;
     private final ItemPlacementContext context;
+    private final ServerWorld world;
 
     public PlayerBlockPlaceEvent(ItemPlacementContext context, BlockState blockState) {
-        this.player = context.getPlayer();
+        this.player = (ServerPlayerEntity) context.getPlayer();
         this.block = blockState.getBlock();
+        this.world = (ServerWorld) context.getWorld();
         this.blockState = blockState;
         this.context = context;
     }
@@ -26,7 +30,7 @@ public class PlayerBlockPlaceEvent implements Event {
     /**
      * @return the player who placed the block
      */
-    public PlayerEntity getPlayer() {
+    public ServerPlayerEntity getPlayer() {
         return player;
     }
 
@@ -42,6 +46,13 @@ public class PlayerBlockPlaceEvent implements Event {
      */
     public BlockState getBlockState() {
         return blockState;
+    }
+
+    /**
+     * @return the world where the block was placed
+     */
+    public ServerWorld getWorld() {
+        return world;
     }
 
     /**

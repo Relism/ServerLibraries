@@ -13,11 +13,12 @@ base {
 }
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
+    // for development builds
+    maven {
+        name = "sonatype-oss-snapshots1"
+        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        mavenContent { snapshotsOnly() }
+    }
 }
 
 dependencies {
@@ -31,6 +32,10 @@ dependencies {
 
     modImplementation(include("org.yaml:snakeyaml:2.0"))
     shadow 'org.yaml:snakeyaml:2.0'
+
+    modImplementation(include("net.kyori:adventure-api:4.17.0"))
+    modImplementation(include("net.kyori:adventure-text-minimessage:4.17.0"))
+    modImplementation(include("net.kyori:adventure-platform-fabric:5.13.0"))
 }
 
 processResources {
