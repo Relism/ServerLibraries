@@ -21,7 +21,7 @@ public class BlockStateChangeMixin {
     private void onBlockStateChanged(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         //block is burning
         if (state.getBlock() instanceof AbstractFireBlock /*&& !burningBlocks.contains(pos)*/) {
-            msg.broadcast("Block at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + " is burning!");
+            //msg.broadcast("Block at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + " is burning!");
             BlockBurningEvent event = new BlockBurningEvent(state, world, pos, oldState, notify);
             EventsRegistry.dispatchEvent(event);
             if (event.isCancelled()) {

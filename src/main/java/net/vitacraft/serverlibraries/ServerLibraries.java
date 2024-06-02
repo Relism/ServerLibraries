@@ -1,12 +1,16 @@
 package net.vitacraft.serverlibraries;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.server.MinecraftServer;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventsRegistry;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.ServerStartedEvent;
 import net.vitacraft.serverlibraries.api.utils.msg;
+
+import java.util.Collection;
 
 public class ServerLibraries implements ModInitializer, Listener {
 
@@ -19,6 +23,13 @@ public class ServerLibraries implements ModInitializer, Listener {
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);
         EventsRegistry.registerListener(new TestListener());
+
+        Collection<ModContainer> mods = FabricLoader.getInstance().getAllMods();
+        for (ModContainer mod : mods) {
+            if(mod.getMetadata().getId().equals("serverlibraries")) {
+                continue;
+            }
+        }
     }
 
     public static String getModId() {

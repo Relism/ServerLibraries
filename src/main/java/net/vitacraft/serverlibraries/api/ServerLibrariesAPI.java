@@ -10,6 +10,7 @@ public class ServerLibrariesAPI {
     private static final Scheduler scheduler = new Scheduler();
     private static final Logger Logger = LogManager.getLogger(ServerLibraries.getModId());
     private static final ComponentLogger CompLogger = ComponentLogger.logger(ServerLibraries.getModId());
+    private static final String version = "1.0.0";
 
     public static Logger getLogger() {
         return Logger;
@@ -21,5 +22,9 @@ public class ServerLibrariesAPI {
 
     public static Scheduler getScheduler() {
         return scheduler;
+    }
+
+    public static String getVersion() {
+        return version;
     }
 }

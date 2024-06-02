@@ -9,8 +9,10 @@
     "BlockMixin",
     "BlockStateChangeMixin",
     "EntityMoveMixin",
-    "PlayerEntityMixin",
+    "MinecraftServerMixin",
+    "PlayerInteractEntityC2SPacketAccessor",
     "PlayerPlaceBlockMixin",
+    "ScreenHandlerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
