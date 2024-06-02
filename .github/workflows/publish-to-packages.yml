@@ -9,6 +9,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+
     steps:
       - name: Checkout repository 📥
         uses: actions/checkout@v4
@@ -25,10 +26,8 @@ jobs:
       - name: Grant execute permission for Gradle wrapper script 🛠️
         run: chmod +x ./gradlew
 
-      - name: Print environment variables
-        run: printenv
-
       - name: Publish package 🚀
         run: ./gradlew publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
