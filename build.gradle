@@ -85,6 +85,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            groupId = 'net.vitacraft' // Set your group ID
+            artifactId = 'serverlibraries' // Set your artifact ID in lowercase
+            version = '1.0-SNAPSHOT' // Set your version
         }
     }
 
