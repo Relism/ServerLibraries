@@ -3,6 +3,7 @@ package net.vitacraft.serverlibraries.api.event;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
@@ -13,6 +14,7 @@ import net.vitacraft.serverlibraries.api.event.events.commands.CommandRegistrati
 import net.vitacraft.serverlibraries.api.event.events.entities.*;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.*;
 import net.vitacraft.serverlibraries.api.event.events.networking.*;
+import net.vitacraft.serverlibraries.api.event.events.players.PlayerChangeWorldEvent;
 import net.vitacraft.serverlibraries.api.utils.msg;
 
 import java.lang.reflect.Method;
@@ -101,7 +103,6 @@ public class EventsRegistry {
         });
         EntitySleepEvents.ALLOW_SLEEP_TIME.register((entity, sleepingPos, vanillaResult) -> {
             SleepAllowTimeEvent event = new SleepAllowTimeEvent(entity, sleepingPos, vanillaResult);
-            dispatchEvent(event);
             return getActionResultFromEventDispatch(dispatchEvent(event));
         });
         EntitySleepEvents.START_SLEEPING.register((entity, sleepingPos) -> {
@@ -118,6 +119,14 @@ public class EventsRegistry {
         });
         EntityTrackingEvents.STOP_TRACKING.register((trackedEntity, player) -> {
             PlayerStopTrackingEvent event = new PlayerStopTrackingEvent(trackedEntity, player);
+            dispatchEvent(event);
+        });
+        ServerEntityWorldChangeEvents.AFTER_ENTITY_CHANGE_WORLD.register((originalEntity, newEntity, origin, destination) -> {
+            EntityChangeWorldEvent event = new EntityChangeWorldEvent(originalEntity, newEntity, origin, destination);
+            dispatchEvent(event);
+        });
+        ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((originalPlayerEntity, origin, destination) -> {
+            PlayerChangeWorldEvent event = new PlayerChangeWorldEvent(originalPlayerEntity, origin, destination);
             dispatchEvent(event);
         });
     }
@@ -139,10 +148,10 @@ public class EventsRegistry {
             ServerStoppedEvent event = new ServerStoppedEvent(server);
             dispatchEvent(event);
         });
-        ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+        /*ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             ServerStoppingEvent event = new ServerStoppingEvent(server);
             dispatchEvent(event);
-        });
+        });*/
         ServerLifecycleEvents.START_DATA_PACK_RELOAD.register((server, serverResourceManager) -> {
             DataPackReloadStartEvent event = new DataPackReloadStartEvent(server, serverResourceManager);
             dispatchEvent(event);

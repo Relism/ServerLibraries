@@ -1,30 +1,40 @@
 package net.vitacraft.serverlibraries.api;
 
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
+import net.minecraft.server.MinecraftServer;
 import net.vitacraft.serverlibraries.ServerLibraries;
+import net.vitacraft.serverlibraries.api.metrics.ServerMetrics;
+import net.vitacraft.serverlibraries.api.metrics.ServerMetricsFactory;
 import net.vitacraft.serverlibraries.api.scheduling.Scheduler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.jmx.Server;
 
 public class ServerLibrariesAPI {
     private static final Scheduler scheduler = new Scheduler();
-    private static final Logger Logger = LogManager.getLogger(ServerLibraries.getModId());
-    private static final ComponentLogger CompLogger = ComponentLogger.logger(ServerLibraries.getModId());
+    private static final Logger logger = LogManager.getLogger(ServerLibraries.getModId());
+    private static final ComponentLogger componentLogger = ComponentLogger.logger(ServerLibraries.getModId());
     private static final String version = "1.0.0";
 
-    public static Logger getLogger() {
-        return Logger;
+    public Logger getLogger() {
+        return logger;
     }
 
     public static ComponentLogger getComponentLogger() {
-        return CompLogger;
+        return componentLogger;
     }
 
     public static Scheduler getScheduler() {
         return scheduler;
     }
 
-    public static String getVersion() {
+    public String getVersion() {
         return version;
     }
+
+    public static ServerMetrics getServerMetrics(MinecraftServer server) {
+        return new ServerMetricsFactory(server).getMetrics();
+    }
+
 }
+

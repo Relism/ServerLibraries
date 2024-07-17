@@ -15,6 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ScreenHandlerMixin {
     @Inject(method = "canInsertItemIntoSlot", at = @At("HEAD"), cancellable = true)
     private static void sgui$blockIfVirtual(Slot slot, ItemStack stack, boolean allowOverflow, CallbackInfoReturnable<Boolean> cir) {
-        msg.log("canInsertItemIntoSlot");
+        //msg.log("canInsertItemIntoSlot");
     }
 }

@@ -8,15 +8,15 @@
     "BellResonateMixin",
     "BlockMixin",
     "BlockStateChangeMixin",
+    "CommandManagerMixin",
     "EntityMoveMixin",
     "MinecraftServerMixin",
-    "PlayerInteractEntityC2SPacketAccessor",
     "PlayerPlaceBlockMixin",
     "ScreenHandlerMixin",
     "ServerPlayerEntityMixin",
-    "ServerPlayNetworkHandlerMixin"
-  ],
-  "client": [
+    "ServerPlayerInteractionManagerMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "ServerWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

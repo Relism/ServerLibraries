@@ -1,16 +1,20 @@
 package net.vitacraft.serverlibraries;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
+import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.text.Component;
 import net.minecraft.server.MinecraftServer;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventsRegistry;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.ServerStartedEvent;
 import net.vitacraft.serverlibraries.api.utils.msg;
-
-import java.util.Collection;
+import net.vitacraft.serverlibraries.bossbars.BossbarManager;
+import net.vitacraft.serverlibraries.bossbars.TPSBossbar;
+import net.vitacraft.serverlibraries.commands.MetricsCommand;
+import net.vitacraft.serverlibraries.commands.ModsCommand;
+import net.vitacraft.serverlibraries.commands.PingCommand;
+import net.vitacraft.serverlibraries.commands.TPSBarCommand;
 
 public class ServerLibraries implements ModInitializer, Listener {
 
@@ -19,17 +23,22 @@ public class ServerLibraries implements ModInitializer, Listener {
 
     @Override
     public void onInitialize() {
-        msg.log("&#c0c0c0Initializing &#555555ServerLibraries &ffffff🚀");
+        msg.log("Initializing &#f49ac2ServerLibraries &#ffffff🚀");
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);
         EventsRegistry.registerListener(new TestListener());
+        BossbarManager.registerBossBar(
+                new TPSBossbar(),
+                5,
+                Component.text("TPS Bar"),
+                BossBar.Color.GREEN,
+                BossBar.Overlay.PROGRESS
+        );
 
-        Collection<ModContainer> mods = FabricLoader.getInstance().getAllMods();
-        for (ModContainer mod : mods) {
-            if(mod.getMetadata().getId().equals("serverlibraries")) {
-                continue;
-            }
-        }
+        ModsCommand.register();
+        MetricsCommand.register();
+        TPSBarCommand.register();
+        PingCommand.register();
     }
 
     public static String getModId() {

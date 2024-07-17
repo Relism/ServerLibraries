@@ -33,9 +33,9 @@ dependencies {
     modImplementation(include("org.yaml:snakeyaml:2.0"))
     shadow 'org.yaml:snakeyaml:2.0'
 
-    modImplementation(include("net.kyori:adventure-api:4.17.0"))
+    modImplementation(include("net.kyori:adventure-api:4.18.0-SNAPSHOT"))
     modImplementation(include("net.kyori:adventure-text-minimessage:4.17.0"))
-    modImplementation(include("net.kyori:adventure-platform-fabric:5.13.0"))
+    modImplementation(include("net.kyori:adventure-platform-fabric:5.14.0"))
 }
 
 processResources {

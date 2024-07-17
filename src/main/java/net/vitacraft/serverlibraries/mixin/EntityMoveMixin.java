@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EntityMoveMixin {
     @Inject(method = "move", at = @At("HEAD"), cancellable = true)
     private void onMove(CallbackInfo ci) {
-        Entity entity = (Entity) (Object) this;
+        /*Entity entity = (Entity) (Object) this;
         Vec3d position = entity.getPos();
         if (entity instanceof ServerPlayerEntity player) {
             PlayerMoveEvent event = new PlayerMoveEvent(player, position);
@@ -29,7 +29,7 @@ public abstract class EntityMoveMixin {
             if (event.isCancelled()) {
                 ci.cancel();
             }
-        }
+        }*/
     }
 }
 

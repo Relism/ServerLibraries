@@ -1,5 +1,6 @@
 package net.vitacraft.serverlibraries.api.scheduling;
 
+import net.vitacraft.serverlibraries.ServerLibraries;
 import net.vitacraft.serverlibraries.api.ServerLibrariesAPI;
 import org.jetbrains.annotations.NotNull;
 

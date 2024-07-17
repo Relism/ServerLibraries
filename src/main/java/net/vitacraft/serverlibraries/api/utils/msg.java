@@ -1,17 +1,16 @@
 package net.vitacraft.serverlibraries.api.utils;
 
-import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.platform.AudienceProvider;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.vitacraft.serverlibraries.ServerLibraries;
 import net.vitacraft.serverlibraries.api.ServerLibrariesAPI;
+import org.apache.logging.log4j.core.jmx.Server;
 
 public class msg {
 
-    private static final MiniMessage mm = MiniMessage.miniMessage();
+    public static final MiniMessage mm = MiniMessage.miniMessage();
 
     public static void log(String message) {
         String coloredMessage = applyColorTags(message);
@@ -44,23 +43,33 @@ public class msg {
     }
 
     public static String applyColorTags(String message) {
-        String[] words = message.split(" ");
         StringBuilder coloredMessage = new StringBuilder();
-        String currentColor = null;
 
-        for (String word : words) {
-            if (word.startsWith("&#")) {
-                currentColor = word.substring(2, 8);
-                word = word.substring(8);
-            }
-            if (currentColor != null) {
-                coloredMessage.append("<color:#").append(currentColor).append(">").append(word).append("</color> ");
+        int index = 0;
+        while (index < message.length()) {
+            if (message.startsWith("&#", index)) {
+                // Find the end of color code
+                int endIndex = message.indexOf("&#", index + 1);
+                if (endIndex == -1) {
+                    endIndex = message.length();
+                }
+
+                // Extract color code and text
+                String colorCode = message.substring(index + 2, index + 8);
+                String text = message.substring(index + 8, endIndex);
+
+                // Append color tag to result
+                coloredMessage.append("<color:#").append(colorCode).append(">").append(text).append("</color>");
+
+                // Move index forward
+                index = endIndex;
             } else {
-                coloredMessage.append(word).append(" ");
+                // No color code found, append remaining text
+                coloredMessage.append(message.charAt(index));
+                index++;
             }
         }
 
-        return coloredMessage.toString().trim();
+        return coloredMessage.toString();
     }
-
 }
