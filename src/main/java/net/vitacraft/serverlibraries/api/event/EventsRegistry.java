@@ -15,10 +15,10 @@ import net.vitacraft.serverlibraries.api.event.events.entities.*;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.*;
 import net.vitacraft.serverlibraries.api.event.events.networking.*;
 import net.vitacraft.serverlibraries.api.event.events.players.PlayerChangeWorldEvent;
-import net.vitacraft.serverlibraries.api.utils.msg;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class EventsRegistry {
@@ -40,31 +40,64 @@ public class EventsRegistry {
     }
 
     public static boolean dispatchEvent(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event cannot be null");
+        }
+
+        List<Handler> handlers = new ArrayList<>();
         for (Listener listener : listeners) {
-            dispatchEvent(listener, event);
-            if (event.isCancelled()) {
+            handlers.addAll(getHandlers(listener, event));
+        }
+
+        // Sort handlers by priority
+        handlers.sort(Comparator.comparing(handler -> handler.priority));
+
+        // Dispatch events in sorted order
+        for (Handler handler : handlers) {
+            if (!event.isCancelled() || handler.priority == EventPriority.MONITOR) {
+                handler.invoke(event);
+            }
+            if (event.isCancelled() && handler.priority != EventPriority.MONITOR) {
                 return false;
             }
         }
         return true;
     }
 
-    private static void dispatchEvent(Object listener, Event event) {
+    private static List<Handler> getHandlers(Listener listener, Event event) {
+        List<Handler> handlers = new ArrayList<>();
         Class<?> listenerClass = listener.getClass();
         Method[] methods = listenerClass.getMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(EventHandler.class)) {
+                EventHandler eventHandler = method.getAnnotation(EventHandler.class);
+                EventPriority priority = eventHandler.priority();
                 Class<?>[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes.length == 1 && parameterTypes[0].isAssignableFrom(event.getClass())) {
-                    try {
-                        if (event.isCancelled()) {
-                            continue;
-                        }
-                        method.invoke(listener, event);
-                    } catch (Exception e) {
-                        msg.log("Error dispatching event: " + event.getClass().getSimpleName() + " to listener: " + listenerClass.getSimpleName() + " with method: " + method.getName() + " - " + e.getMessage());
-                    }
+                    handlers.add(new Handler(listener, method, priority));
                 }
+            }
+        }
+        return handlers;
+    }
+
+    private static class Handler {
+        private final Object listener;
+        private final Method method;
+        private final EventPriority priority;
+
+        public Handler(Object listener, Method method, EventPriority priority) {
+            this.listener = listener;
+            this.method = method;
+            this.priority = priority;
+        }
+
+        public void invoke(Event event) {
+            try {
+                method.invoke(listener, event);
+            } catch (Exception e) {
+                System.err.println("Error dispatching event: " + event.getClass().getSimpleName() + " to listener: " + listener.getClass().getSimpleName() + " with method: " + method.getName() + " - " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }

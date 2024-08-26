@@ -1,24 +1,17 @@
 package net.vitacraft.serverlibraries;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
+import net.vitacraft.serverlibraries.api.event.EventPriority;
 import net.vitacraft.serverlibraries.api.event.Listener;
-import net.vitacraft.serverlibraries.api.event.events.blocks.PlayerBlockBreakEvent;
-import net.vitacraft.serverlibraries.api.event.events.commands.PlayerCommandPreProcessEvent;
-import net.vitacraft.serverlibraries.api.event.events.entities.EntityChangeWorldEvent;
-import net.vitacraft.serverlibraries.api.event.events.players.PlayerChangeWorldEvent;
 import net.vitacraft.serverlibraries.api.event.events.players.PlayerChatEvent;
-import net.vitacraft.serverlibraries.api.event.events.players.PlayerMoveEvent;
 import net.vitacraft.serverlibraries.api.utils.msg;
 import org.jetbrains.annotations.NotNull;
 
 public class TestListener implements Listener {
 
-    /*
-    @EventHandler
+
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
         event.setCancelled(true);
         ServerPlayerEntity player = event.getPlayer();
@@ -28,6 +21,7 @@ public class TestListener implements Listener {
         msg.log(formattedMessage);
     }
 
+    /*
     @EventHandler
     public void onPlayerMoveEvent(@NotNull PlayerMoveEvent event) {
         ServerPlayerEntity player = event.getPlayer();
