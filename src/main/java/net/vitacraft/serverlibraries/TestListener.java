@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TestListener implements Listener {
 
-
+    /*
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
         event.setCancelled(true);
@@ -21,7 +21,7 @@ public class TestListener implements Listener {
         msg.log(formattedMessage);
     }
 
-    /*
+
     @EventHandler
     public void onPlayerMoveEvent(@NotNull PlayerMoveEvent event) {
         ServerPlayerEntity player = event.getPlayer();
