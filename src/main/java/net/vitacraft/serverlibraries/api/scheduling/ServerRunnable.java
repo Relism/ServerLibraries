@@ -36,7 +36,6 @@ public abstract class ServerRunnable implements Runnable {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalStateException if this was already scheduled
-     * @see ServerScheduler#(Runnable)
      */
     @NotNull
     public synchronized ServerSchedulerTask runTask() throws IllegalArgumentException, IllegalStateException {
