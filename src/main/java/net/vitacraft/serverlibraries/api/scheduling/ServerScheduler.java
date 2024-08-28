@@ -13,7 +13,6 @@ public interface ServerScheduler {
      * @param task Task to be executed
      * @param delay Delay in server ticks before executing task
      * @return Task id number (-1 if scheduling failed)
-     * @deprecated Use {@link ServerRunnable#(long)}
      */
     @Deprecated
     public int scheduleSyncDelayedTask(@NotNull ServerRunnable task, long delay);
@@ -168,7 +167,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#()}
      */
     @Deprecated
     @NotNull
@@ -188,7 +186,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#()}
      */
     @Deprecated
     @NotNull
@@ -211,7 +208,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#(long)}
      */
     @Deprecated
     @NotNull
@@ -234,7 +230,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#(long)}
      */
     @Deprecated
     @NotNull
@@ -259,7 +254,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#(long, long)}
      */
     @Deprecated
     @NotNull
@@ -286,7 +280,6 @@ public interface ServerScheduler {
      * @return a ServerSchedulerTask that contains the id number
      * @throws IllegalArgumentException if plugin is null
      * @throws IllegalArgumentException if task is null
-     * @deprecated Use {@link ServerRunnable#(long, long)}
      */
     @Deprecated
     @NotNull
