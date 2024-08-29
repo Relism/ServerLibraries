@@ -11,7 +11,7 @@
     "CommandManagerMixin",
     "EntityMoveMixin",
     "MinecraftServerMixin",
-    "PlayerPlaceBlockMixin",
+    "BlockItemMixin",
     "ScreenHandlerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayerInteractionManagerMixin",
