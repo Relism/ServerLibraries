@@ -34,7 +34,6 @@ public class ServerLibraries implements ModInitializer, Listener {
                 BossBar.Color.GREEN,
                 BossBar.Overlay.PROGRESS
         );
-
         ModsCommand.register();
         MetricsCommand.register();
         TPSBarCommand.register();

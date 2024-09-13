@@ -1,3 +1,7 @@
 # Project exclude paths
 /.gradle/
 /build/
+/run/world/
+/run/resources/
+/run/usercache.json
+/run/logs/

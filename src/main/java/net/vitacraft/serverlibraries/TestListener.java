@@ -2,11 +2,13 @@ package net.vitacraft.serverlibraries;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventPriority;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.entities.EntityMoveEvent;
 import net.vitacraft.serverlibraries.api.event.events.players.PlayerChatEvent;
+import net.vitacraft.serverlibraries.api.event.events.players.PlayerMoveEvent;
 import net.vitacraft.serverlibraries.api.utils.msg;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +21,7 @@ public class TestListener implements Listener {
         }
     }
 
-    /*
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
         event.setCancelled(true);
