@@ -19,6 +19,7 @@ repositories {
         url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
         mavenContent { snapshotsOnly() }
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -30,8 +31,8 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation(include("org.yaml:snakeyaml:2.0"))
-    shadow 'org.yaml:snakeyaml:2.0'
+    modImplementation(include("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4"))
+    shadow 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
 
     modImplementation(include("net.kyori:adventure-api:4.18.0-SNAPSHOT"))
     modImplementation(include("net.kyori:adventure-text-minimessage:4.17.0"))

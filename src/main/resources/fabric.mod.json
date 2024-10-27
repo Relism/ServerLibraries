@@ -10,12 +10,12 @@
   "contact": {},
   "license": "GPL-3.0",
   "icon": "assets/serverlibraries/icon.png",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
     "client": [
       "net.vitacraft.serverlibraries.client.ServerLibrariesClient"
     ],
-    "main": [
+    "server": [
       "net.vitacraft.serverlibraries.ServerLibraries"
     ]
   },

@@ -5,8 +5,6 @@ import net.vitacraft.serverlibraries.api.event.Event;
 public class TickEvent implements Event {
     private boolean cancelled = false;
 
-
-
     @Override
     public boolean isCancelled() {
         return cancelled;

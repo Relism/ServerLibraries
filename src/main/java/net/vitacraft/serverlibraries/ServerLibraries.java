@@ -1,6 +1,6 @@
 package net.vitacraft.serverlibraries;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.DedicatedServerModInitializer;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.minecraft.server.MinecraftServer;
@@ -16,13 +16,13 @@ import net.vitacraft.serverlibraries.commands.ModsCommand;
 import net.vitacraft.serverlibraries.commands.PingCommand;
 import net.vitacraft.serverlibraries.commands.TPSBarCommand;
 
-public class ServerLibraries implements ModInitializer, Listener {
+public class ServerLibraries implements DedicatedServerModInitializer, Listener {
 
     private static final String MOD_ID = "serverlibraries";
     private static MinecraftServer SERVER;
 
     @Override
-    public void onInitialize() {
+    public void onInitializeServer() {
         msg.log("Initializing &#f49ac2ServerLibraries &#ffffff🚀");
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);

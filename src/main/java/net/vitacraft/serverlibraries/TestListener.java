@@ -1,12 +1,20 @@
 package net.vitacraft.serverlibraries;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.Vec3d;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventPriority;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.entities.EntityMoveEvent;
 import net.vitacraft.serverlibraries.api.event.events.players.PlayerChatEvent;
+import net.vitacraft.serverlibraries.api.utils.SoundPlayer;
 import net.vitacraft.serverlibraries.api.utils.msg;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,14 +22,15 @@ public class TestListener implements Listener {
 
     @EventHandler
     public void onEntityMoveEvent(EntityMoveEvent event){
-        if(event.getEntity().getType().equals(EntityType.BEE)){
+        if(event.getEntity().getType().equals(EntityType.BEE) || event.getEntity().getType().equals(EntityType.COW)){
             event.setCancelled(true);
         }
     }
 
-    /*
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
+        SoundPlayer.playSoundForPlayer(event.getPlayer(), SoundEvents.ENTITY_COW_MILK, 1.0f, 1.0f);
         event.setCancelled(true);
         ServerPlayerEntity player = event.getPlayer();
         String message = event.getMessage();
@@ -30,7 +39,7 @@ public class TestListener implements Listener {
         msg.log(formattedMessage);
     }
 
-
+    /*
     @EventHandler
     public void onPlayerMoveEvent(@NotNull PlayerMoveEvent event) {
         ServerPlayerEntity player = event.getPlayer();
