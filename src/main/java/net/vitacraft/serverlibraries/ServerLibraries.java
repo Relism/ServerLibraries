@@ -31,7 +31,6 @@ public class ServerLibraries implements DedicatedServerModInitializer, Listener 
                 BossBar.Color.GREEN,
                 BossBar.Overlay.PROGRESS
         );
-
         ModsCommand.register();
         MetricsCommand.register();
         TPSBarCommand.register();

@@ -1,2 +1,14 @@
 /.gradle/
 /build/
+/run/world/
+/run/resources/
+/run/usercache.json
+/run/logs/
+/run/crash-reports/
+/run/data/
+/run/.fabric/
+/run/config/
+/run/downloads/
+
+/.idea/runConfigurations/
+/run/
