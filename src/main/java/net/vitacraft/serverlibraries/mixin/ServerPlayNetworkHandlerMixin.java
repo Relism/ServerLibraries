@@ -26,6 +26,7 @@ import java.util.Set;
 @Mixin(ServerPlayNetworkHandler.class)
 public class ServerPlayNetworkHandlerMixin {
 
+    @Unique
     private static long lastAcceptedPacket = 0;
 
     @Shadow
@@ -55,7 +56,7 @@ public class ServerPlayNetworkHandlerMixin {
         EventsRegistry.dispatchEvent(event);
         if(event.isCancelled()){
             ci.cancel();
-            if (System.nanoTime() >= lastAcceptedPacket + 1000000) {
+            if (System.nanoTime() >= lastAcceptedPacket) {
                 player.networkHandler.requestTeleport(player.getX(), player.getY(), player.getZ(), player.getYaw(), player.getPitch());
                 lastAcceptedPacket = System.nanoTime();
             }

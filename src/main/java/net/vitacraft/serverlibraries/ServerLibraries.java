@@ -11,10 +11,7 @@ import net.vitacraft.serverlibraries.api.event.events.lifecycle.ServerStartedEve
 import net.vitacraft.serverlibraries.api.utils.msg;
 import net.vitacraft.serverlibraries.bossbars.BossbarManager;
 import net.vitacraft.serverlibraries.bossbars.TPSBossbar;
-import net.vitacraft.serverlibraries.commands.MetricsCommand;
-import net.vitacraft.serverlibraries.commands.ModsCommand;
-import net.vitacraft.serverlibraries.commands.PingCommand;
-import net.vitacraft.serverlibraries.commands.TPSBarCommand;
+import net.vitacraft.serverlibraries.commands.*;
 
 public class ServerLibraries implements DedicatedServerModInitializer, Listener {
 
@@ -39,6 +36,7 @@ public class ServerLibraries implements DedicatedServerModInitializer, Listener 
         MetricsCommand.register();
         TPSBarCommand.register();
         PingCommand.register();
+        RandomSoundCommand.register();
     }
 
     public static String getModId() {

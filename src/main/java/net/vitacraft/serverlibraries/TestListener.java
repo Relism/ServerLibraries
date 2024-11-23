@@ -8,15 +8,23 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventPriority;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.entities.EntityMoveEvent;
 import net.vitacraft.serverlibraries.api.event.events.players.PlayerChatEvent;
+import net.vitacraft.serverlibraries.api.event.events.players.PlayerMoveEvent;
 import net.vitacraft.serverlibraries.api.utils.SoundPlayer;
 import net.vitacraft.serverlibraries.api.utils.msg;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestListener implements Listener {
 
@@ -27,10 +35,8 @@ public class TestListener implements Listener {
         }
     }
 
-
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
-        SoundPlayer.playSoundForPlayer(event.getPlayer(), SoundEvents.ENTITY_COW_MILK, 1.0f, 1.0f);
         event.setCancelled(true);
         ServerPlayerEntity player = event.getPlayer();
         String message = event.getMessage();
@@ -39,7 +45,7 @@ public class TestListener implements Listener {
         msg.log(formattedMessage);
     }
 
-    /*
+
     @EventHandler
     public void onPlayerMoveEvent(@NotNull PlayerMoveEvent event) {
         ServerPlayerEntity player = event.getPlayer();
@@ -48,6 +54,8 @@ public class TestListener implements Listener {
         msg.sendActionBar(player, message);
         //event.setCancelled(true);
     }
+
+    /*
 
     /*@EventHandler
     public void onEntityChangeWorldEvent(@NotNull EntityChangeWorldEvent event) {
