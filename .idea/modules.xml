@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Serverlibraries.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Serverlibraries.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Serverlibraries.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Serverlibraries.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.vitacraft.Serverlibraries.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.vitacraft.Serverlibraries.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.vitacraft.Serverlibraries.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.vitacraft.Serverlibraries.test.iml" />
+    </modules>
+  </component>
+</project>
