@@ -8,6 +8,7 @@ import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventsRegistry;
 import net.vitacraft.serverlibraries.api.event.Listener;
 import net.vitacraft.serverlibraries.api.event.events.lifecycle.ServerStartedEvent;
+import net.vitacraft.serverlibraries.api.utils.StaticRegistry;
 import net.vitacraft.serverlibraries.api.utils.msg;
 import net.vitacraft.serverlibraries.bossbars.BossbarManager;
 import net.vitacraft.serverlibraries.bossbars.TPSBossbar;
@@ -21,6 +22,7 @@ public class ServerLibraries implements DedicatedServerModInitializer, Listener 
     @Override
     public void onInitializeServer() {
         msg.log("Initializing &#f49ac2ServerLibraries &#ffffff🚀");
+        StaticRegistry.init();
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);
         EventsRegistry.registerListener(new TestListener());

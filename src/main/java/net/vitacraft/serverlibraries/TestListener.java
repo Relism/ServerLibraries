@@ -16,11 +16,11 @@ public class TestListener implements Listener {
 
     @EventHandler
     public void onEntityMoveEvent(EntityMoveEvent event){
-        if(event.getEntity().getType().equals(EntityType.BEE) || event.getEntity().getType().equals(EntityType.COW)){
+        if(event.getEntity().getType().equals(EntityType.BEE)){
             event.setCancelled(true);
         }
     }
-
+    
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChatEvent(@NotNull PlayerChatEvent event) {
         event.setCancelled(true);
@@ -40,8 +40,6 @@ public class TestListener implements Listener {
         msg.sendActionBar(player, message);
         //event.setCancelled(true);
     }
-
-    /*
 
     /*@EventHandler
     public void onEntityChangeWorldEvent(@NotNull EntityChangeWorldEvent event) {
