@@ -1,3 +1,4 @@
+# Project exclude paths
 /.gradle/
 /build/
 /run/world/
@@ -15,5 +16,4 @@
 /run/server.properties
 /run/whitelist.json
 
-/.idea/runConfigurations/
-/run/
+/.idea/
