@@ -9,6 +9,11 @@
 /run/.fabric/
 /run/config/
 /run/downloads/
+/run/banned-ips.json
+/run/banned-players.json
+/run/ops.json
+/run/server.properties
+/run/whitelist.json
 
 /.idea/runConfigurations/
 /run/
