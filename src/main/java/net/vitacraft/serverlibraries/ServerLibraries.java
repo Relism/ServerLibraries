@@ -4,6 +4,8 @@ import net.fabricmc.api.DedicatedServerModInitializer;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.minecraft.server.MinecraftServer;
+import net.vitacraft.serverlibraries.api.config.ConfigUtil;
+import net.vitacraft.serverlibraries.api.config.YAMLConfig;
 import net.vitacraft.serverlibraries.api.event.EventHandler;
 import net.vitacraft.serverlibraries.api.event.EventsRegistry;
 import net.vitacraft.serverlibraries.api.event.Listener;
@@ -18,10 +20,14 @@ public class ServerLibraries implements DedicatedServerModInitializer, Listener 
 
     private static final String MOD_ID = "serverlibraries";
     private static MinecraftServer SERVER;
+    private static YAMLConfig config;
 
     @Override
     public void onInitializeServer() {
         msg.log("Initializing &#f49ac2ServerLibraries &#ffffff🚀");
+        ConfigUtil configUtil = new ConfigUtil(MOD_ID);
+        config = (YAMLConfig) configUtil.getConfig("config.yml", ConfigUtil.Filetype.YAML, ConfigUtil.PathType.MODFOLDER);
+        msg.log(config.getBool("debug") ? "❗ Debug mode is enabled" : "❗ Debug mode is disabled");
         StaticRegistry.init();
         EventsRegistry.initializeGlobalListener();
         EventsRegistry.registerListener(this);
@@ -46,6 +52,10 @@ public class ServerLibraries implements DedicatedServerModInitializer, Listener 
 
     public static MinecraftServer getServer() {
         return SERVER;
+    }
+
+    public static YAMLConfig getConfig() {
+        return config;
     }
 
     @EventHandler

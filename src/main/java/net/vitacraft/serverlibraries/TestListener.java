@@ -41,49 +41,4 @@ public class TestListener implements Listener {
         //event.setCancelled(true);
     }
 
-    /*@EventHandler
-    public void onEntityChangeWorldEvent(@NotNull EntityChangeWorldEvent event) {
-        Entity originalEntity = event.getOriginEntity();
-        Entity newEntity = event.getNewEntity();
-        ServerWorld origin = event.getOriginWorld();
-        ServerWorld destination = event.getDestWorld();
-
-        // Creating the message with hex colors
-        String message = String.format("&#00FF00Entity &#FFFFFF%s &#00FF00changed to &#FFFFFF%s &#00FF00and moved from world &#FFFFFF%s &#00FF00to world &#FFFFFF%s",
-                originalEntity.getName().getString(),
-                newEntity.getName().getString(),
-                origin.getRegistryKey().getValue().toString(),
-                destination.getRegistryKey().getValue().toString());
-
-        msg.broadcast(message);
-    }
-
-    @EventHandler
-    public void onPlayerChangeWorldEvent(@NotNull PlayerChangeWorldEvent event) {
-        ServerPlayerEntity player = event.getPlayer();
-        ServerWorld origin = event.getOriginWorld();
-        ServerWorld destination = event.getDestWorld();
-
-        // Creating the message with hex colors
-        String message = String.format("&#00FF00Player &#FFFFFF%s &#00FF00moved from world &#FFFFFF%s &#00FF00to world &#FFFFFF%s",
-                player.getName().getString(),
-                origin.getRegistryKey().getValue().toString(),
-                destination.getRegistryKey().getValue().toString());
-
-        msg.broadcast(message);
-    }
-
-    @EventHandler
-    public void onPlayerCommandPreProcessEvent(@NotNull PlayerCommandPreProcessEvent event) {
-        ServerPlayerEntity player = event.getPlayer();
-        String command = event.getCommand();
-        msg.send(player, "You tried running command: " + command);
-        event.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerBlockBreakEvent(PlayerBlockBreakEvent event){
-        event.setCancelled(true);
-    }*/
-
 }

@@ -15,9 +15,6 @@ public class ConfigUtil {
         myModId = modId;
     }
 
-    /**
-     * File types supported by the ConfigUtil
-     */
     public enum Filetype {
         YAML,
         JSON,
@@ -25,21 +22,11 @@ public class ConfigUtil {
         TOML
     }
 
-    /**
-     * Path types supported by the ConfigUtil
-     */
     public enum PathType {
         ABSOLUTE,
-        RELATIVE
+        MODFOLDER
     }
 
-    /**
-     * Get a config file of any type using the path and file type
-     *
-     * @param path a file path
-     * @param filetype a file type
-     * @return Configuration
-     */
     public Config getConfig(String path, Filetype filetype, PathType pathType) {
         File configFile;
 
@@ -47,9 +34,13 @@ public class ConfigUtil {
             case ABSOLUTE:
                 configFile = new File(path);
                 break;
-            case RELATIVE:
+            case MODFOLDER:
+                File myModFolder = new File(System.getProperty("user.dir"), "mods" + File.separator + myModId);
+                if (!myModFolder.exists()) {
+                    msg.log(myModFolder.mkdirs() ? "Created mod folder" : "Failed to create mod folder");
+                }
                 if (myModId != null && !myModId.isEmpty()) {
-                    configFile = new File(System.getProperty("user.dir"), "config" + File.separator + myModId + File.separator + path);
+                    configFile = new File(myModFolder, path);
                 } else {
                     msg.log("Mod ID is null, please set the mod ID before calling getConfig()");
                     return null;
@@ -72,14 +63,6 @@ public class ConfigUtil {
         };
     }
 
-    /**
-     * Copy the config file from resources
-     *
-     * @param path a file path
-     * @param pathType a path type
-     * @param configFile a file
-     * @return boolean
-     */
     private static boolean copyConfigFromResources(String path, PathType pathType, File configFile) {
         String fileName = getFileNameFromAbsolutePath(path, pathType);
         ClassLoader classLoader = ConfigUtil.class.getClassLoader();
@@ -103,11 +86,6 @@ public class ConfigUtil {
         return false;
     }
 
-    /**
-     * Create a new config file
-     *
-     * @param configFile a file
-     */
     private static void createNewConfig(File configFile) {
         try {
             configFile.createNewFile();
@@ -116,13 +94,6 @@ public class ConfigUtil {
         }
     }
 
-    /**
-     * Get the file name from the absolute path
-     *
-     * @param absolutePath a file path
-     * @param pathType a path type
-     * @return String
-     */
     private static String getFileNameFromAbsolutePath(String absolutePath, PathType pathType) {
         if(pathType.equals(PathType.ABSOLUTE)){
             Path path = Paths.get(absolutePath);

@@ -18,6 +18,12 @@ public class msg {
         ServerLibrariesAPI.getComponentLogger().info(messageComponent);
     }
 
+    public static void debug(String message) {
+        if (ServerLibraries.getConfig().getBool("debug")) {
+            log(message);
+        }
+    }
+
     public static void log(Component message) {
         ServerLibrariesAPI.getComponentLogger().info(message);
     }
